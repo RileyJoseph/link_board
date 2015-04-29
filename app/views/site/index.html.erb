@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <h1>Welcome to LinkBoard</h1>
+
+    <h2>
+      <%= "Hi #{@current_user.name}" if @current_user %>
+    </h2>
+    <%= render "layouts/flash" %>
+<br>
+<p>
+
+   <% @posts.each do |p| %>
+
+ <li><%= p.title%>: <br>  <a href="//<%=p.link%>"><%= p.link%></a></li>
+
+ <% end %>
+ </p>
+
+  </div>
+</div>
+

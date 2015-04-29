@@ -5,9 +5,23 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <script type="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
 </head>
 <body>
 
+<div class="navbar">
+  <a class="navbar-brand"><%= link_to "Home", root_path, :class => "navbar-brand" %></a>
+  <ul class="nav navbar-nav">
+    <li class="active">
+      <a href="/signup">Sign-Up</a>
+    </li>
+    <li>
+      <a href="/post">Add Post!</a>
+    </li>
+  </ul>
+</div>
 <%= yield %>
 
 </body>
