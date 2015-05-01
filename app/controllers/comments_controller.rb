@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
 
 def index
+  @vote = Vote.new
   @comments = Comment.all
   @post = Post.find(params[:post_id])
   # render :json => params
@@ -13,6 +14,10 @@ def new
   # render :json => params
 end
 
+def show
+
+end
+
 def create
   @post = Post.find(params[:post_id])
   @comment = @post.comments.create(comment_params)
@@ -23,7 +28,6 @@ def create
     flash.now[:danger] = "error"
   end
 end
-
 
 private
 

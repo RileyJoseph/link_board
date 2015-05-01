@@ -2,38 +2,16 @@
 <div class="col-md-8 col-md-offset-2">
     <center>
     <h2><%= "Hi, #{@current_user.name}" if @current_user %></h2>
-    <h1>Welcome to LinkBoard</h1>
+    <h1>Submit a post here!</h1>
     </center>
     <%= render "layouts/flash" %>
-
-    <table class="table">
-      <tr>
-        <th>Votes</th>
-        <th>Score</th>
-        <th>Title</th>
-        <th>Link</th>
-        <th>Comment</th>
-      </tr>
-      <% @posts.each do |post| %>
-      <tr>
-        <td>
-          <%= bootstrap_form_for [post, @vote] do |f| %>
-          <%= f.hidden_field :value, value: "1" %>
-          <%= f.button "", class: "btn btn-primary btn-xs glyphicon glyphicon-thumbs-up" %>
-          <% end %>
-          <%= bootstrap_form_for [post, @vote] do |f| %>
-          <%= f.hidden_field :value, value: "-1" %>
-          <%= f.button "", class: "btn btn-danger btn-xs glyphicon glyphicon-thumbs-down" %>
-          <% end %>
-        </td>
-        <td>
-          <%= post.votes.reduce(0){ |sum,v| sum + v.value} %>
-        </td>
-        <td><%= post.title%>:</td>
-        <td><a href="//<%=post.link%>"><%= post.link%></a></td>
-        <td><%=link_to "Comment", new_post_comment_path(post)%></td>
-      </tr>
-      <% end %>
-    </table>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= render "layouts/flash"%>
+    <%= bootstrap_form_for :post do |f| %>
+      <%= f.text_field :title, placeholder:"Title" %>
+      <%= f.text_field :link, placeholder:"Enter your link"%>
+      <%= f.submit "Submit" %>
+    <% end %>
   </div>
 </div>

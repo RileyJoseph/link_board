@@ -1,14 +1,14 @@
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
     <h1>NEW Comment</h1>
-    <h3><%= @post.title %>
+    <h3><%= @post.title %></h3>
 
     <%= bootstrap_form_for [@post, @comment] do |c| %>
       <%= c.text_field :body, placeholder:"Comment"%>
       <%= c.button class: "btn btn-primary", placeholder:"Post" %>
     <% end %>
-
-<p>Comments here?!</p>
+<br>
+<p>Comments:</p>
 <table class="table">
   <th>Votes</th>
   <th>Score</th>
@@ -16,7 +16,7 @@
   <th>User</th>
     <% @post.comments.each do |t| %>
     <tr>
-    <td>
+    <td style="width:20px">
       <%= bootstrap_form_for [@post,t, @vote] do |f| %>
       <%= f.hidden_field :value, value: "1" %>
       <%= f.button "", class: "btn btn-primary btn-xs glyphicon glyphicon-thumbs-up" %>

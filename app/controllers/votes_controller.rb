@@ -1,13 +1,14 @@
 class VotesController < ApplicationController
 
 
+
 def create
-  if params.key?(:post_id)
-    thing = Post.find_by_id(params[:post_id])
+  if params.key?(:comment_id)
+    thing = Comment.find_by_id(params[:comment_id])
   elsif params.key?(:user_id)
     thing = User.find_by_id(params[:user_id])
-  elsif params.key?(:comment_id)
-    thing = Comment.find_by_id(params[:comment_id])
+  elsif params.key?(:post_id)
+    thing = Post.find_by_id(params[:post_id])
   else
     return render plain: "You're doing something stupid"
   end
@@ -31,10 +32,10 @@ def create
 # end
 
 if params.key?(:comment_id)
-      thing = Comment.find_by_id(params[:comment_id])
+    thing = Post.find_by_id(params[:post_id])
     redirect_to new_post_comment_path(thing)
   elsif params.key?(:post_id)
-    redirect_to :posts
+    redirect_to root_path
   else
     redirect_to :posts
   end

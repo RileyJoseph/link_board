@@ -1,14 +1,39 @@
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
-    <h1>Comments</h1>
-    <h3><%= @post.title %>
+    <h1>NEW Comment</h1>
+    <h3><%= @post.title %></h3>
 
-    <%= bootstrap_form_for :comment do |c| %>
+    <%= bootstrap_form_for [@post, @comment] do |c| %>
       <%= c.text_field :body, placeholder:"Comment"%>
-      <%= c.submit "Post" %>
+      <%= c.button class: "btn btn-primary", placeholder:"Post" %>
     <% end %>
+<br>
+<p>Comments</p>
+<table class="table">
+  <th>Votes</th>
+  <th>Score</th>
+  <th>Comment</th>
+  <th>User</th>
+    <% @post.comments.each do |t| %>
+    <tr>
+    <td>
+      <%= bootstrap_form_for [@post,t, @vote] do |f| %>
+      <%= f.hidden_field :value, value: "1" %>
+      <%= f.button "", class: "btn btn-primary btn-xs glyphicon glyphicon-thumbs-up" %>
+      <% end %>
+      <%= bootstrap_form_for [@post,t, @vote] do |f| %>
+      <%= f.hidden_field :value, value: "-1" %>
+      <%= f.button "", class: "btn btn-danger btn-xs glyphicon glyphicon-thumbs-down" %>
+      <% end %>
+    </td>
+    <td>
+      <%= t.votes.reduce(0){ |sum,v| sum + v.value} %>
+    </td>
+    <td><%= t.body %></td>
+    <td><%= t.user.name %></td>
+    </tr>
+    <%end%>
 
-<p>Comments here?!</p>
-
+</table>
   </div>
 </div>

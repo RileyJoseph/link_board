@@ -1,36 +1,37 @@
 <div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <h2>
-      <%= "Hi, #{@current_user.name}" if @current_user %>
-    </h2>
+<div class="col-md-8 col-md-offset-2">
+    <center>
+    <h2><%= "Hi, #{@current_user.name}" if @current_user %></h2>
     <h1>Welcome to LinkBoard</h1>
-
+    </center>
     <%= render "layouts/flash" %>
 
-
     <table class="table">
-    <tr>
-      <th>Votes</th>
-      <th>Title</th>
-      <th>Link</th>
-      </tr>
-      <% @posts.each do |p| %>
       <tr>
-       <td>
-        <% p.votes.each do |t| %>
-       <%= t.value %>
-       <% end %>
-       </td>
-       <td><%= p.title%>:</td>
-       <td><a href="//<%=p.link%>"><%= p.link%></a></td>
-
-       <!-- <td><%# button_tag(:type => 'submit', :class => 'btn btn-success') do %>+<i class="icon-up-arrow icon-white"></i></td> -->
-       <%# end %>
-       <td><%= button_tag(:type => 'submit', :class => 'btn btn-danger') do %>-<i class="icon-up-arrow icon-white"></i></td>
-     </tr>
-     <% end %>
-     <% end %>
-   </table>
- </div>
+        <th>Votes</th>
+        <th>Score</th>
+        <th>Title</th>
+        <th>Comments</th>
+      </tr>
+      <% @posts.each do |post| %>
+      <tr>
+        <td style="width:20px">
+          <%= bootstrap_form_for [post, @vote] do |f| %>
+          <%= f.hidden_field :value, value: "1" %>
+          <%= f.button "", class: "btn btn-primary btn-xs glyphicon glyphicon-thumbs-up" %>
+          <% end %>
+          <%= bootstrap_form_for [post, @vote] do |f| %>
+          <%= f.hidden_field :value, value: "-1" %>
+          <%= f.button "", class: "btn btn-danger btn-xs glyphicon glyphicon-thumbs-down" %>
+          <% end %>
+        </td>
+        <td>
+          <%= post.votes.reduce(0){ |sum,v| sum + v.value} %>
+        </td>
+        <td><%= link_to post.title, post.link%></a></td>
+        <td><%=link_to "#{post.comments.length} Comments", new_post_comment_path(post)%></td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
 </div>
-
