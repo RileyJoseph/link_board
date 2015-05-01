@@ -9,7 +9,7 @@ def new
 end
 
 def create
-  @user = User.new(user_params)    # Not the final implementation!
+  @user = User.new(user_params)
     if @user.save
       flash[:success]='Signup Successful!'
       redirect_to root_path

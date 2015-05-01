@@ -4,10 +4,13 @@ class SiteController < ApplicationController
 
   def index
     @posts = Post.all
+    @votes = Vote.all
   end
 
   def about
   end
 
+  def create
+  end
 
 end

@@ -1,21 +1,36 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
+    <h2>
+      <%= "Hi, #{@current_user.name}" if @current_user %>
+    </h2>
     <h1>Welcome to LinkBoard</h1>
 
-    <h2>
-      <%= "Hi #{@current_user.name}" if @current_user %>
-    </h2>
     <%= render "layouts/flash" %>
-<br>
-<p>
 
-   <% @posts.each do |p| %>
 
- <li><%= p.title%>: <br>  <a href="//<%=p.link%>"><%= p.link%></a></li>
+    <table class="table">
+    <tr>
+      <th>Votes</th>
+      <th>Title</th>
+      <th>Link</th>
+      </tr>
+      <% @posts.each do |p| %>
+      <tr>
+       <td>
+        <% p.votes.each do |t| %>
+       <%= t.value %>
+       <% end %>
+       </td>
+       <td><%= p.title%>:</td>
+       <td><a href="//<%=p.link%>"><%= p.link%></a></td>
 
- <% end %>
- </p>
-
-  </div>
+       <!-- <td><%# button_tag(:type => 'submit', :class => 'btn btn-success') do %>+<i class="icon-up-arrow icon-white"></i></td> -->
+       <%# end %>
+       <td><%= button_tag(:type => 'submit', :class => 'btn btn-danger') do %>-<i class="icon-up-arrow icon-white"></i></td>
+     </tr>
+     <% end %>
+     <% end %>
+   </table>
+ </div>
 </div>
 

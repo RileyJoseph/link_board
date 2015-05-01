@@ -10,11 +10,14 @@ Rails.application.routes.draw do
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
 
+
   get 'logout' => 'sessions#destroy'
   delete 'logout' => 'sessions#destroy'
 
   get 'post' => 'posts#index'
   post 'post' => 'posts#create'
+
+  post 'comment' => 'comment#create'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
@@ -22,7 +25,12 @@ Rails.application.routes.draw do
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
+    resources :posts do
+      resources :votes, :only => [:create]
+      resources :comments do
+        resource :votes, :only => [:create]
+      end
+end
 
   # Example resource route with options:
   #   resources :products do

@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <h1>Comments</h1>
+    <h3><%= @post.title %>
+
+    <%= bootstrap_form_for :comment do |c| %>
+      <%= c.text_field :body, placeholder:"Comment"%>
+      <%= c.submit "Post" %>
+    <% end %>
+
+<p>Comments here?!</p>
+
+  </div>
+</div>
